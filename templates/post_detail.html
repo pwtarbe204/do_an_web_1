@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily taste</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap&subset=vietnamese"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{{ post.title }}</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            font-size: 17px;
+            font-weight: 400;
+            background-color: #fdfdfd;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+        }
+
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 18%;
+            /* Vì sidebar chiếm 18%, nên bắt đầu từ đó */
+            right: 0;
+            height: 70px;
+            background-color: white;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .top-bar a {
+            /* Bỏ dấu gạch chân cho thẻ a và chỉnh kích cở của phần tử */
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .logo {
+            /*căn chỉnh vị trí của logo*/
+            position: absolute;
+            left: 50%;
+            transform: translateX(-10%);
+        }
+
+        .logo img {
+            /*Căn chỉnh kích cở cho trang web*/
+            margin-top: 10px;
+            width: 280px;
+            height: 100px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            /* căn giữa theo chiều ngang */
+            align-items: center;
+
+        }
+
+        /*                 */
+        .container2 {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container2 input {
+            width: 200px;
+            height: 40px;
+            border-radius: 10px;
+            font-size: 16px;
+            margin: 0 5px;
+            bottom: 10px;
+            border: solid 1px rgb(19, 20, 20);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .avatar-img {
+            border-radius: 50%;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .logout {
+            display: flex;
+
+        }
+
+        .login-email {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
+
+        .login-email input {
+            width: 250px;
+            height: 40px;
+            border-radius: 5px;
+            outline-color: #0a47cc;
+            border: 1px solid rgb(94, 95, 98);
+            font-size: 15px;
+            background-color: rgb(250, 250, 250);
+            margin-bottom: 15px;
+            padding-left: 8px;
+        }
+
+        .login-email button {
+            width: 260px;
+            height: 55px;
+            background-color: #1053e2;
+            color: rgb(255, 255, 255);
+            border-radius: 5px;
+            font-size: 16px;
+            border-style: none;
+            cursor: pointer;
+        }
+
+        .login-email button:hover {
+            background-color: #0a44c2;
+        }
+
+        .dropdown-email {
+            position: absolute;
+            top: 45px;
+            /* khoảng cách từ nút xuống */
+            right: 180px;
+            display: none;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            color: #797676;
+
+        }
+
+
+        .auth-buttons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-left: auto;
+            background-color: transparent;
+        }
+
+        .auth-area {
+            display: flex;
+            align-items: center;
+        }
+
+        .inline-icon-text {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            color: rgb(255, 255, 255);
+        }
+
+        .register {
+            /*Chỉnh nút chữ đăng nhập và icon đăng nhập*/
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .register a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .icon-link {
+            /*Chỉnh icon đăng nhập và tìm kiếm*/
+            text-decoration: none;
+            color: rgb(255, 255, 255);
+            font-size: 18px;
+        }
+
+        .menu-bar {
+            /*Phần danh mục*/
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px 0;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            /*border-bottom: 1px solid rgb(196, 193, 193);*/
+        }
+
+        .menu-icons {
+            /* */
+            display: flex;
+            gap: 30px;
+        }
+
+        .menu-icons a {
+            text-decoration: none;
+        }
+
+        .icon-large {
+            font-size: 20px;
+            font-weight: bold;
+            justify-items: center;
+        }
+
+        .menu-bar a {
+            display: block;
+            /* giúp phủ toàn bộ vùng */
+            text-decoration: none;
+            color: black;
+            transition: color 0.3s;
+        }
+
+        .menu-bar a:hover {
+            color: rgb(5, 20, 108);
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 10px;
+            padding: 10px;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .box img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+
+        /* main {
+            margin-left: 15%;
+            margin-right: 15%;
+        } */
+
+        .dangnhap {
+            width: 120px;
+            height: 45px;
+            background-color: aliceblue;
+            text-align: center;
+            align-items: center;
+            padding: 5px;
+            font-size: 17px;
+            font-family: 'Poppins', sans-serif;
+            border-radius: 10px;
+            border-color: gainsboro;
+            font-weight: 500;
+            color: rgb(95, 91, 91);
+            cursor: pointer;
+        }
+
+        .vietmonmoi {
+            width: 180px;
+            height: 45px;
+            background-color: rgb(255, 118, 20);
+            text-align: center;
+            align-items: center;
+            padding: 5px;
+            font-size: 17px;
+            font-weight: 500;
+            border-radius: 10px;
+            border-color: gainsboro;
+            font-family: 'Poppins', sans-serif;
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            border: none;
+        }
+
+        .vietmonmoi:hover {
+            background-color: rgb(245, 106, 7);
+        }
+
+        .vietmonmoi i {
+            font-size: 23px;
+            align-items: center;
+        }
+
+        .post-container {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .post-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .step img {
+            max-width: 600px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        .meta {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .section {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .section p {
+            /* margin-bottom: 5px; */
+            line-height: 2.0;
+            text-align: justify;
+        }
+
+        .section h2 {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .step {
+            margin-bottom: 20px;
+            width: 800px;
+            height: 600px;
+        }
+
+        .step-number {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .ingredients,
+        .serving,
+        .time {
+            margin-bottom: 5px;
+            line-height: 2.0;
+            text-align: justify;
+        }
+
+        .step p {
+            line-height: 2.0;
+            text-align: justify;
+            /* Tỉ lệ theo font-size (khuyên dùng) */
+        }
+
+        .layout-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            /* width: 18%;
+            background-color: #fff;
+            border-right: 1px solid #ddd;
+            padding: 20px 15px;
+            box-sizing: border-box; */
+
+            width: 18%;
+            background-color: #fff;
+            border-right: 1px solid #ddd;
+            padding: 20px 15px;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            /* Chiều cao 100% màn hình */
+            overflow-y: auto;
+            /* Nếu nội dung dài */
+            z-index: 1000;
+        }
+
+        .sidebar .logo-sidebar img {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .sidebar .menu a {
+            display: block;
+            padding: 10px 5px;
+            margin-bottom: 10px;
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+        }
+
+        .sidebar .menu a:hover {
+            background-color: #f0f0f0;
+        }
+
+
+        .main-content {
+            font-family: 'Roboto', sans-serif;
+            font-size: 17px;
+            font-weight: 400;
+            color: #19232d;
+            flex: 1;
+            width: 82%;
+            padding: 50px 40px 20px;
+            box-sizing: border-box;
+            margin-left: 18%;
+        }
+
+        .layout2 {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar2 {
+            width: 60%;
+            margin-top: 5px;
+            padding: 20px;
+        }
+
+        .content2 {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 20px;
+        }
+
+        .sidebar2 h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.3;
+            justify-content: center;
+        }
+
+        .meobietdattengi {
+            color: rgb(83, 163, 3);
+            margin-bottom: 20px;
+        }
+
+        .comment-box {
+            margin-top: 40px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            max-width: 800px;
+            /* margin: 40px auto; */
+            border: 1px solid #e0e0e0;
+            /* background-color: #edd9d9; */
+        }
+
+        .comment-box h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .comment-box textarea {
+            width: 100%;
+            height: 100px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 15px;
+            font-family: 'Segoe UI', sans-serif;
+            resize: vertical;
+            outline-color: #1053e2;
+            transition: border 0.3s ease;
+        }
+
+        .comment-box textarea:focus {
+            border-color: #1053e2;
+        }
+
+        .submit-comment {
+            margin-top: 12px;
+            background-color: #1053e2;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 500;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .submit-comment:hover {
+            background-color: #0a44c2;
+        }
+
+        footer {
+            margin-left: 18%;
+            /* trừ phần sidebar */
+            padding: 20px;
+            background-color: #111827;
+            /* Màu đậm hơn */
+            color: #fff;
+        }
+
+        .related-posts {
+            display: flex;
+            flex-wrap: wrap;
+            /* Nếu nhiều quá thì xuống hàng */
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .related-post {
+            background: transparent;
+            border: none;
+            border-radius: 2px;
+            overflow: hidden;
+            width: 250px;
+            /* Chiều rộng mỗi bài */
+            flex-shrink: 0;
+            /* Không co lại */
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .related-post:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .related-post img {
+            width: 110%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .related-post p {
+            font-size: 14px;
+            font-weight: bold;
+            color: rgb(219, 97, 9);
+            padding: 5px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body data-user="{{ 'yes' if user else 'no' }}">
+
+    <div class="layout-container">
+        <!-- Sidebar trái -->
+        <aside class="sidebar">
+            <div class="logo-sidebar">
+                <img src="{{ url_for('static', filename='logo_final5.png') }}" alt="logo" />
+            </div>
+
+            <nav class="menu">
+
+                <!-- <a href="#"><i class="fa fa-crown"></i> Trang Chủ</a> -->
+                <div><a href="{{ url_for('index') }}"><i class="fa fa-crown"></i> Trang Chủ</a></div>
+                <a href="{{ url_for('danhsach_baidang') }}"><i class="fa fa-chart-bar"></i> Danh Sách Bài Đăng</a>
+                <a href="{{ url_for('list_favorites') }}"><i class="fa fa-heart"></i> Danh Sách Yêu Thích</a>
+                <a href="{{ url_for('vietmonmoi') }}"><i class="fa fa-book"></i> Viết món mới</a>
+                <a href="{{ url_for('logout') }}"><i class="fa-solid fa-arrow-right-from-bracket"></i>Đăng xuất</a>
+            </nav>
+        </aside>
+        <div class="main-content"> <!--Bên phải -->
+
+            <div class="top-bar">
+                <div class="auth-buttons">
+                    <div class="auth-area">
+                        {% if user %}
+
+                        {% if user.type == 'google' %} <!--Nếu đăng nhập bằng google-->
+                        <img src="{{ user.picture }}" alt="Google Avatar" class="avatar-img" id="avatar-email">
+
+                        <div id="popupBox" class="dropdown-email">
+                            <img src="{{ user.picture }}" alt="Google Avatar" class="avatar-img">
+                            <div>{{ user.email }}</div>
+                            <div>{{ user.name }}</div>
+                            <form action="/logout">
+                                <button class="dangnhap"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng
+                                    xuất</button>
+                            </form>
+                        </div>
+
+                        {% else %} <!--Nếu đăng nhập bằng email-->
+                        <img src="{{ user.picture }}" alt="Default Avatar" class="avatar-img" id="avatar-email"
+                            style="width: 40px; height: 40px; border-radius: 50%;">
+
+                        <div id="popupBox" class="dropdown-email">
+                            <img src="{{ user.picture }}" alt="Google Avatar" class="avatar-img">
+                            <div class="email">{{ user.email }}</div>
+                            <form action="/logout">
+                                <button class="dangnhap"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng
+                                    xuất</button>
+                            </form>
+                        </div>
+
+                        {% endif %}
+                        {% else %} <!--Nếu chưa đăng nhập-->
+                        <form action="/dangky-dangnhap">
+                            <button class="dangnhap">Đăng nhập</button>
+                        </form>
+                        {% endif %}
+                    </div>
+
+                    <form action="{{ url_for('vietmonmoi') }}" method="POST">
+                        <button id="btnVietMonMoi" class="vietmonmoi"><i class="bi bi-pencil-square"></i> Viết món
+                            mới</button>
+                    </form>
+                </div>
+            </div>
+
+
+            <div class="layout2">
+                <aside class="sidebar2"><!--Thanh bên trái-->
+                    <div class="meobietdattengi">
+                        <a href="{{ url_for('index') }}">Trang Chủ /</a>
+                        <a href="{{ url_for('posts_by_category', category_id=post.category_id) }}"
+                            style="color: rgb(83, 163, 3);">
+                            {{ post.category_name }}
+                        </a>
+                        / {{ post.title }}
+                    </div>
+                    <!-- <div class="meobietdattengi">Trang chủ / {{ post.category_name }} / {{ post.title }}</div> -->
+                    <h1>{{ post.title }}</h1>
+                    <p class="meta">Đăng bởi: {{ post.author }} | Ngày đăng: {{ post.created_at }}</p>
+                    <img src="/{{ post.image }}" alt="Hình ảnh bài viết">
+                    <div class="section">
+                        <p>{{ post.description }}</p>
+                    </div>
+                </aside>
+
+                <main class="content2"><!--Nội dung chính-->
+                    <div class="section">
+                        <h2>Thông tin món ăn</h2>
+                        <p class="ingredients"><strong>Nguyên liệu:</strong> {{ post.ingredients }}</p>
+                        <p class="serving"><strong>Khẩu phần:</strong> {{ post.serving_size }}</p>
+                        <p class="time"><strong>Thời gian nấu:</strong> {{ post.cooking_time }}</p>
+                    </div>
+
+                </main>
+            </div>
+            <!-- <div class="post-container"> -->
+
+
+            <div class="section">
+                <h2>Các bước thực hiện</h2>
+                {% for step in steps %}
+                <div class="step">
+                    <div class="step-number">Bước {{ step[0] }}</div>
+                    <p>{{ step[1] }}</p>
+                    {% if step[2] %}
+                    <img src="/{{ step[2] }}" alt="Ảnh bước {{ step[0] }}">
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            <!--Thêm vào danh sách yêu thích-->
+            {% if user %}
+            <button id="btnFavorite" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+                ❤️ Thêm vào danh sách yêu thích
+            </button>
+            {% else %}
+            <a href="{{ url_for('dangkydangnhap') }}" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+                ❤️ Thêm vào danh sách yêu thích
+            </a>
+            {% endif %}
+
+            <h1 style="font-weight: bold; margin-bottom: 40px; font-size: 23px; margin-top: 45px;">Các bài viết cùng chủ
+                đề</h1>
+            <div class="related-posts">
+                {% for rp in related_posts %}
+                <div class="related-post">
+                    <a href="{{ url_for('view_post', post_id=rp[0]) }}">
+                        <img src="/{{ rp[2] }}" alt="Ảnh bài viết">
+                        <p>{{ rp[1] }}</p>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!--        dfgfbf -->
+            <div class="comments-list"
+                style="margin-top: 40px; font-family: 'Roboto', sans-serif;background-color: rgb(249, 246, 243);border-radius: 10px; padding: 25px 25px;">
+                <h2 style="font-size:22px; font-weight: bold;">Bình luận</h2>
+                {% for c in comments %}
+                <div class="comment-item"
+                    style="display:flex; align-items:flex-start; gap:10px; border-bottom:1px solid #ddd; padding:10px 0;">
+                    <img src="{{ c.avatar }}" alt="avatar" style="width:30px; height:30px; border-radius:50%;">
+                    <div>
+                        <strong style="font-weight: 500; font-size:15px;">{{ c.email }}</strong>
+                        <small style="font-size:12px; margin-left: 5px;">{{ c.created_at.strftime('%d/%m/%Y %H:%M')
+                            }}</small>
+                        <p style="font-family: 'Roboto', sans-serif;">{{ c.content }}</p>
+                    </div>
+                </div>
+                {% else %}
+                <p style="margin-top: 8px;">(Chưa có bình luận nào!)</p>
+                {% endfor %}
+            </div>
+
+            <div class="comment-box">
+                <h2>Gửi bình luận</h2>
+                <textarea id="commentContent" placeholder="Viết bình luận của bạn..."></textarea>
+                <button type="button" class="submit-comment" id="submitComment">
+                    <i class="fa fa-paper-plane"></i> Gửi
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <footer class="bg-gray-900 text-white py-10">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Logo & Mô tả -->
+            <div>
+                <h2 class="text-2xl font-bold mb-2">Daily state</h2>
+
+            </div>
+
+            <!-- Liên kết nhanh -->
+            <div>
+                <h3 class="text-xl font-semibold mb-3">Liên kết</h3>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="{{ url_for('index') }}" class="hover:text-white transition">Trang chủ</a></li>
+                    <li><a href="#" class="hover:text-white transition">Về chúng tôi</a></li>
+                    <li><a href="#" class="hover:text-white transition">Dịch vụ</a></li>
+                    <li><a href="#" class="hover:text-white transition">Liên hệ</a></li>
+                </ul>
+            </div>
+
+            <!-- Hỗ trợ -->
+            <div>
+                <h3 class="text-xl font-semibold mb-3">Hỗ trợ</h3>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="#" class="hover:text-white transition">FAQ</a></li>
+                    <li><a href="#" class="hover:text-white transition">Chính sách</a></li>
+                    <li><a href="#" class="hover:text-white transition">Bảo mật</a></li>
+                    <li><a href="#" class="hover:text-white transition">Điều khoản</a></li>
+                </ul>
+            </div>
+
+            <!-- Mạng xã hội -->
+            <div>
+                <h3 class="text-xl font-semibold mb-3">Kết nối với chúng tôi</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-700 mt-10 pt-5 text-center text-sm text-gray-500">
+            © 2025 MyWebsite. All rights reserved.
+        </div>
+    </footer>
+    </div>
+
+    <script>
+        const avatar_email = document.getElementById('avatar-email');
+        const popup = document.getElementById('popupBox');
+
+        avatar_email.addEventListener('click', function (event) {
+            // Toggle hiển thị popup
+            popup.style.display = (popup.style.display === 'block') ? 'none' : 'block';
+        });
+
+        document.addEventListener('click', function (event) {
+            // Ẩn popup nếu click bên ngoài
+            if (!popup.contains(event.target) && !avatar_email.contains(event.target)) {
+                popup.style.display = 'none';
+            }
+        });
+
+        document.getElementById('submitComment').addEventListener('click', function (event) {
+            event.preventDefault(); // Ngăn reload trang mặc định
+
+            const content = document.getElementById('commentContent').value.trim();
+            if (!content) {
+                alert("Vui lòng nhập nội dung bình luận.");
+                return;
+            }
+
+            fetch(`/post/{{ post.id }}/comment`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ content })
+            })
+                .then(res => res.json().then(data => ({ status: res.status, body: data })))
+                .then(({ status, body }) => {
+                    if (body.redirect) {
+                        window.location.href = body.redirect; // Chuyển sang đăng nhập
+                    } else if (body.success) {
+                        location.reload();
+                    } else {
+                        alert(body.error || `Có lỗi xảy ra (status ${status}).`);
+                    }
+                })
+                .catch(err => {
+                    console.error("Lỗi khi gửi bình luận:", err);
+                    alert("Có lỗi xảy ra khi gửi bình luận.");
+                });
+        });
+
+        document.getElementById('btnFavorite')?.addEventListener('click', function () {
+            fetch(`/favorite/{{ post.id }}`, {
+                method: 'POST'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    alert(data.message || "Đã thêm vào danh sách yêu thích!");
+                })
+                .catch(err => console.error(err));
+        });
+
+    </script>
+</body>
+
+</html>

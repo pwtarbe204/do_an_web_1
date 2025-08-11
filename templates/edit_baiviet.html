@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily taste</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: white;
+            z-index: 999;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            font-size: 17px;
+            font-weight: 300;
+        }
+
+        .main-content {
+            font-family: 'Roboto', sans-serif;
+            font-size: 17px;
+            padding-top: 60px;
+            margin-left: 18%;
+            /* ✅ giống danhsach_baidang */
+            width: 82%;
+            box-sizing: border-box;
+            transition: margin-left 0.3s ease;
+        }
+
+        .sidebar.collapsed~.main-content {
+            margin-left: 60px;
+        }
+
+        .button-header1 {
+            height: 40px;
+            width: 140px;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 17px;
+            border: solid 1px rgb(223, 14, 14);
+            color: red;
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        .button-header1 i {
+            font-size: 16px;
+            color: red;
+            margin-right: 8px;
+        }
+
+        .button-header1:hover {
+            background-color: #e6e1e1;
+        }
+
+        .button-header2 {
+            height: 40px;
+            width: 140px;
+            padding: 0 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 17px;
+            border: solid 1px rgb(216, 209, 209);
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        .button-header3 {
+            height: 40px;
+            width: 140px;
+            padding: 0 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 17px;
+            border: none;
+            color: white;
+            background-color: rgb(255, 118, 20);
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .button-header3:hover {
+            background-color: rgb(186, 85, 12);
+        }
+
+        .container {
+            margin-top: 20px;
+            display: flex;
+            padding: 10px 20px;
+            margin-left: 80%;
+            padding: 0 20px;
+            gap: 20px;
+        }
+
+        .tenmon input {
+            margin-top: 10px;
+            width: 91%;
+            height: 55px;
+            font-size: 27px;
+            background-color: rgb(239, 236, 232);
+            color: rgb(124, 120, 120);
+            border-radius: 5px;
+            border-style: none;
+            font-weight: 600;
+            padding-left: 10px;
+
+        }
+
+        textarea.autogrow {
+            margin-top: 10px;
+            width: 90%;
+            min-height: 55px;
+            max-height: 300px;
+            font-size: 15px;
+            background-color: rgb(239, 236, 232);
+            color: rgb(124, 120, 120);
+            border-radius: 5px;
+            padding: 5px 10px;
+            border: none;
+            outline: none;
+            resize: none;
+
+        }
+
+        .hinh {
+            background-color: rgb(239, 236, 232);
+            width: 100%;
+            height: 400px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            cursor: pointer;
+            /* Căn giữa theo chiều ngang */
+        }
+
+        .hinh:hover {
+            background-color: rgb(205, 203, 201);
+            ;
+        }
+
+        .hinh i {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 60px;
+            color: #d3cece;
+        }
+
+        .khauphan {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .khauphan input {
+            border-style: none;
+            width: 170px;
+            height: 40px;
+            padding: 5px 10px;
+            font-size: 15px;
+            background-color: rgb(239, 236, 232);
+            color: rgb(124, 120, 120);
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .container2 {
+            margin-top: 280px;
+        }
+
+        .buoc {
+            display: flex;
+            gap: 90px;
+        }
+
+        .buoc input {
+            border-style: none;
+            width: 170px;
+            height: 40px;
+            padding: 5px 10px;
+            background-color: rgb(239, 236, 232);
+            color: rgb(124, 120, 120);
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .container3 {
+            position: relative;
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .container3 textarea {
+            border-style: none;
+            width: 90%;
+            min-height: 55px;
+            max-height: 300px;
+            padding: 5px 10px;
+            font-size: 16px;
+            background-color: rgb(239, 236, 232);
+            color: #5c5858;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            resize: none;
+            border-style: none;
+        }
+
+
+        .menu-options {
+            position: absolute;
+            top: 40px;
+            right: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            padding: 5px;
+            display: none;
+            flex-direction: column;
+            z-index: 10;
+            border-radius: 6px;
+        }
+
+        .menu-options button {
+            background: none;
+            border: none;
+            padding: 6px 12px;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .menu-options button:hover {
+            background-color: #eee;
+        }
+
+        .menu-toggle {
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+
+        .circle-number {
+            width: 30px;
+            /* chiều rộng */
+            height: 30px;
+            /* chiều cao */
+            background-color: #615f5f;
+            /* màu nền */
+            color: white;
+            /* màu chữ */
+            border-radius: 50%;
+            /* tạo hình tròn */
+            display: flex;
+            /* căn giữa nội dung */
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .image-camera {
+            background-color: rgb(239, 236, 232);
+            width: 180px;
+            height: 120px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 39px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .image-camera:hover {
+            background-color: rgb(205, 203, 201);
+        }
+
+        .image-camera i {
+            font-size: 20px;
+            color: #726e6e;
+            z-index: 2;
+        }
+
+        .image-camera img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .bakicho {
+            position: relative;
+            gap: 10px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .bakicho textarea {
+            border-style: none;
+            width: 80%;
+            height: 40px;
+            font-size: 16px;
+            padding: 5px 10px;
+            background-color: rgb(239, 236, 232);
+            color: #5c5858;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            resize: none;
+            border-style: none;
+        }
+
+        .bakicho i {
+            font-size: 22px;
+            align-items: center;
+            color: #5c5858;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            color: #333;
+        }
+
+        select {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px 12px;
+            font-size: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            color: #333;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            outline: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10'%3E%3Cpath fill='gray' d='M7 10L0 0h14z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 10px;
+        }
+
+        select:focus {
+            border-color: none;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+            background-color: #fff;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        input.invalid,
+        textarea.invalid,
+        select.invalid {
+            border: 1px solid red !important;
+        }
+
+        .char-count {
+            font-size: 13px;
+            color: #777;
+            text-align: right;
+            margin-top: 2px;
+        }
+
+        .buoclam {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 19px;
+            margin-bottom: 40px;
+            cursor: pointer;
+            color: #555;
+        }
+
+        .buoclam:hover {
+            color: orange;
+            text-decoration: underline;
+        }
+
+
+        .sidebar.collapsed {
+            width: 80px;
+        }
+
+        .sidebar .toggle-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+            cursor: pointer;
+        }
+
+        .sidebar .menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar .menu li {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            font-size: 16px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .sidebar .menu li i {
+            margin-right: 10px;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .sidebar.collapsed .menu li span {
+            display: none;
+        }
+
+        .sidebar.collapsed .menu li {
+            justify-content: center;
+        }
+
+        .sidebar.collapsed .menu li i {
+            margin-right: 0;
+        }
+
+        /* 
+        .main-content {
+            margin-left: 18%;
+            padding: 100px 20px 20px;
+        } */
+
+
+        .sidebar.collapsed~.main-content {
+            margin-left: 60px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 33% 65% 5%;
+            height: 100%;
+            transition: margin-left 0.3s ease;
+        }
+
+        /*Khi sidebar collapse, dồn content-grid sang trái */
+        .sidebar.collapsed~.main-content .content-grid {
+            grid-template-columns: 33% 65% 5%;
+        }
+
+        .sidebar:not(.collapsed)~.main-content .content-grid {
+            grid-template-columns: 33% 65% 5%;
+        }
+
+        /* .sidebar {
+            font-family: 'Roboto', sans-serif;
+            font-size: 17px;
+            width: 18%;
+            background-color: #fff;
+            border-right: 1px solid #ddd;
+            padding: 20px 15px;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+        } */
+
+        .sidebar {
+            width: 18%;
+            background-color: #fff;
+            border-right: 1px solid #ddd;
+            padding: 20px 15px;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+
+        .logo-sidebar img {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .sidebar .menu a {
+            display: block;
+            padding: 10px 5px;
+            margin-bottom: 10px;
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+        }
+
+        .sidebar .menu a:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <!-- <button type="submit" class="button-header1" type="button"
+                onclick="return confirm('Bạn có chắc chắn muốn xóa không?')"><i class="fa-solid fa-trash-can"></i>
+                Xóa</button> -->
+
+            <!-- <button class="button-header2" type="button">Lưu</button> -->
+            <button class="button-header3" type="button">Cập nhật</button>
+        </div>
+    </header>
+    <aside class="sidebar">
+        <div class="logo-sidebar">
+            <img src="{{ url_for('static', filename='logo_final5.png') }}" alt="logo" />
+        </div>
+        <nav class="menu">
+            <a href="{{ url_for('index') }}"><i class="fa fa-crown"></i> Trang Chủ</a>
+            <a href="{{ url_for('danhsach_baidang') }}"><i class="fa fa-chart-bar"></i> Danh Sách Bài Đăng</a>
+            <a href="{{ url_for('list_favorites') }}"><i class="fa fa-heart"></i> Danh Sách Yêu Thích</a>
+            <div style="background-color: #ddd;"><a href="{{ url_for('vietmonmoi') }}"><i class="fa fa-book"></i> Viết
+                    món mới</a></div>
+            <a href="{{ url_for('logout') }}"><i class="fa-solid fa-arrow-right-from-bracket"></i>Đăng xuất</a>
+
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div class="content-grid">
+            <div style="background: #faf9f9;"> <!--Cột Trai-->
+                <div class="hinh" onclick="document.getElementById('imgInput').click();">
+                    <img id="preview" src="{{ post.image_url }}" style="display: block; width: 100%; height: 100%;" />
+                    <i id="icon" class="fa-regular fa-image"></i>
+                    <input type="file" id="imgInput" accept="image/*" style="display: none;"
+                        onchange="previewImage(event)">
+
+                    <div class="error-message"></div>
+                </div>
+                <div>
+                    <h2 style="color: #999696;">Nguyên liệu</h2>
+                    <div class="khauphan">
+                        <h3>Khẩu phần</h3>
+                        <!-- <input type="text" id="portionInput" placeholder="2 người" maxlength="50"> -->
+                        <input type="text" id="portionInput" value="{{ post.serving_size }}" placeholder="2 người"
+                            maxlength="50">
+                        <div class="char-count" id="portionCount">0/50</div>
+                        <div class="error-message"></div>
+                    </div>
+                </div>
+
+                <div class="bakicho">
+                    <i class="fa-solid fa-bars"></i>
+                    <!-- <textarea id="ingredientInput" placeholder="Thêm nguyên liệu" maxlength="200"></textarea> -->
+                    <textarea id="ingredientInput" placeholder="Thêm nguyên liệu"
+                        maxlength="200">{{ post.ingredients }}</textarea>
+                    <div class="char-count" id="ingredientCount">0/200</div>
+                    <i class="fa-solid fa-ellipsis menu-toggle"></i>
+                    <div class="error-message"></div>
+                </div>
+
+
+            </div>
+
+            <div style="margin-left: 20px;"> <!--Cột phải-->
+                <div class="tenmon">
+                    <input type="text" id="titleInput" value="{{ post.title }}" maxlength="100">
+
+                    <div class="char-count" id="titleCount">0/100</div>
+                    <div class="error-message"></div>
+                </div>
+
+                <!-- <textarea class="autogrow" id="descInput" placeholder="Hãy mô tả về món ăn của bạn." -->
+                <textarea class="autogrow" id="descInput" maxlength="500">{{ post.description }}</textarea>
+                <div class="char-count" id="descCount">0/500</div>
+                <div class="error-message"></div>
+
+                <div class="form-group">
+                    <label for="category">Chọn danh mục:</label>
+                    <select name="category_id" id="category" required>
+                        <option value="">-- Chọn danh mục --</option>
+                        <option value="1" {% if post.category_id==1 %}selected{% endif %}>Món chính</option>
+                        <option value="2" {% if post.category_id==2 %}selected{% endif %}>Ăn vặt</option>
+                        <option value="3" {% if post.category_id==3 %}selected{% endif %}>Tráng miệng</option>
+                        <option value="4" {% if post.category_id==4 %}selected{% endif %}>Đồ uống</option>
+                        <option value="5" {% if post.category_id==5 %}selected{% endif %}>Món chay</option>
+                        <option value="6" {% if post.category_id==6 %}selected{% endif %}>Ẩm thực miền bắc</option>
+                        <option value="7" {% if post.category_id==7 %}selected{% endif %}>Ẩm thực miền trung</option>
+                        <option value="8" {% if post.category_id==8 %}selected{% endif %}>Ẩm thực miền nam</option>
+                        <!-- <option value="1">Món chính</option>
+                        <option value="2">Ăn vặt</option>
+                        <option value="3">Tráng miệng</option>
+                        <option value="4">Đồ uống</option>
+                        <option value="5">Món chay</option>
+                        <option value="6">Ẩm thực miền bắc</option>
+                        <option value="7">Ẩm thực miền trung</option>
+                        <option value="8">Ẩm thực miền nam</option> -->
+                    </select>
+                    <div class="error-message"></div>
+                </div>
+
+
+                <div class="container2">
+                    <h2 style="color: #999696;">Các bước</h2>
+                    <div class="buoc">
+                        <h3>Thời gian nấu</h3>
+                        <input type="text" value="{{ post.cooking_time }}" placeholder="1h30 phút">
+                        <!-- <input type="text" placeholder="1h30 phút"> -->
+                        <div class="error-message"></div>
+                    </div>
+
+                    {% for step in post.steps %}
+                    <div class="container3">
+                        <div class="circle-number">{{ loop.index }}</div>
+                        <textarea placeholder="Bước {{ loop.index }}">{{ step.description }}</textarea>
+
+                        <!-- thêm input ẩn giữ url ảnh hiện có (nếu có), frontend sẽ đọc để gửi về server -->
+                        <input type="hidden" class="existing-image" value="{{ step.image_url or '' }}" />
+
+                        <i class="fa-solid fa-ellipsis menu-toggle"></i>
+                        <!-- <div class="menu-options">
+                            <button class="add-step">➕ Thêm bước</button>
+                            <button class="delete-step">🗑️ Xoá bước</button>
+                        </div> -->
+                        <div class="error-message"></div>
+                    </div>
+
+                    <div class="image-camera">
+                        {% if step.image_url %}
+                        <img src="{{ step.image_url }}" style="display: block;" />
+                        {% else %}
+                        <img style="display: none;" />
+                        <i class="fa-sharp-duotone fa-solid fa-camera"></i>
+                        {% endif %}
+                        <input type="file" accept="image/*" style="display: none;" />
+                    </div>
+                    {% endfor %}
+
+<!-- 
+                    <div class="buoclam">
+                        <i class="fa-solid fa-plus"></i>
+                        Bước làm
+                    </div> -->
+                </div>
+
+
+            </div>
+        </div>
+    </main>
+    <script>
+        const postId = "{{ post.id }}";
+        const textarea = document.querySelector('.autogrow');
+        textarea.addEventListener('input', function () {
+            this.style.height = 'auto';          // Reset chiều cao
+            this.style.height = this.scrollHeight + 'px'; // Set chiều cao = nội dung
+        });
+
+        const textareas = document.querySelectorAll('.container3 textarea');
+
+        textareas.forEach(textarea => {
+            textarea.addEventListener('input', function () {
+                this.style.height = 'auto';
+                this.style.height = this.scrollHeight + 'px';
+            });
+        });
+
+        const textareabakicho = document.querySelectorAll('.bakicho textarea');
+
+        textareabakicho.forEach(textarea => {
+            textarea.addEventListener('input', function () {
+                this.style.height = 'auto';
+                this.style.height = this.scrollHeight + 'px';
+            });
+        });
+
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    const preview = document.getElementById('preview');
+                    const icon = document.getElementById('icon');
+
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    icon.style.display = 'none'; // Ẩn icon
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+
+        document.querySelectorAll('.image-camera').forEach(function (cameraBox) {
+            const fileInput = cameraBox.querySelector('input[type="file"]');
+            const image = cameraBox.querySelector('img');
+            const icon = cameraBox.querySelector('i');
+
+            // Khi click vào ô, mở hộp thoại chọn ảnh
+            cameraBox.addEventListener('click', () => {
+                fileInput.click();
+            });
+
+            // Khi chọn ảnh
+            fileInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        image.src = e.target.result;
+                        image.style.display = 'block';
+                        icon.style.display = 'none';
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+
+        document.querySelectorAll('.container3').forEach(container => {
+            const toggle = container.querySelector('.menu-toggle');
+            const menu = container.querySelector('.menu-options');
+
+            // Nhấn vào icon thì hiển thị menu
+            toggle.addEventListener('click', (e) => {
+                e.stopPropagation(); // Ngăn lan ra ngoài
+                // Ẩn menu của các container khác
+                document.querySelectorAll('.menu-options').forEach(m => {
+                    if (m !== menu) m.style.display = 'none';
+                });
+
+                // Toggle menu của chính nó
+                menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+            });
+
+            // Click ra ngoài thì ẩn
+            document.addEventListener('click', () => {
+                menu.style.display = 'none';
+            });
+        });
+        //fffffffffffffffffffffffffffff
+        document.querySelectorAll('.bakicho').forEach(container => {
+            const toggle = container.querySelector('.menu-toggle');
+            const menu = container.querySelector('.menu-options');
+
+            if (toggle && menu) {
+                toggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    document.querySelectorAll('.menu-options').forEach(m => {
+                        if (m !== menu) m.style.display = 'none';
+                    });
+                    menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+
+                });
+
+                document.addEventListener('click', () => {
+                    menu.style.display = 'none';
+                });
+            }
+        });
+
+        // Tạo và thêm một bước mới
+        function createStep(index) {
+            // Tạo container cho bước
+            const container = document.createElement('div');
+            container.className = 'container3';
+
+            container.innerHTML = `
+        <div class="circle-number">${index}</div>
+        <textarea placeholder="Bước ${index}"></textarea>
+        <i class="fa-solid fa-ellipsis menu-toggle"></i>
+        <div class="menu-options">
+            <button class="add-step">➕ Thêm bước</button>
+            <button class="delete-step">🗑️ Xoá bước</button>
+        </div>
+        <div class="error-message"></div>
+    `;
+
+            // Tạo ô ảnh
+            const imageCamera = document.createElement('div');
+            imageCamera.className = 'image-camera';
+            imageCamera.innerHTML = `
+        <img style="display: none;" />
+        <i class="fa-sharp-duotone fa-solid fa-camera"></i>
+        <input type="file" accept="image/*" style="display: none;" />
+    `;
+
+            return { container, imageCamera };
+        }
+
+        // Cập nhật lại số thứ tự các bước
+        function updateStepNumbers() {
+            document.querySelectorAll('.container3 .circle-number').forEach((el, idx) => {
+                el.textContent = idx + 1;
+                el.parentElement.querySelector('textarea').placeholder = `Bước ${idx + 1}`;
+            });
+        }
+
+        // Gắn sự kiện thêm bước
+        function setupAddStepButtons() {
+            document.querySelectorAll('.add-step').forEach(btn => {
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+
+                    const currentContainer = btn.closest('.container3');
+                    const currentImage = currentContainer.nextElementSibling;
+
+                    const parent = document.querySelector('.container2');
+                    const allSteps = document.querySelectorAll('.container3');
+                    const index = allSteps.length + 1;
+
+                    const { container, imageCamera } = createStep(index);
+
+                    // Chèn ngay sau ảnh của bước hiện tại
+                    parent.insertBefore(container, currentImage.nextSibling);
+                    parent.insertBefore(imageCamera, container.nextSibling);
+
+                    updateStepNumbers();
+                    setupAddStepButtons(); // Rebind
+                    setupDeleteStepButtons();
+                    setupMenuToggle(container);
+                    setupImageUpload(imageCamera);
+                };
+            });
+        }
+
+
+        // Gắn sự kiện xóa bước
+        function setupDeleteStepButtons() {
+            document.querySelectorAll('.delete-step').forEach(btn => {
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    const step = btn.closest('.container3');
+                    const image = step.nextElementSibling;
+                    if (image && image.classList.contains('image-camera')) {
+                        image.remove();
+                    }
+                    step.remove();
+                    updateStepNumbers();
+                };
+            });
+        }
+
+        // Gắn toggle menu cho container mới
+        function setupMenuToggle(container) {
+            const toggle = container.querySelector('.menu-toggle');
+            const menu = container.querySelector('.menu-options');
+
+            toggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                document.querySelectorAll('.menu-options').forEach(m => {
+                    if (m !== menu) m.style.display = 'none';
+                });
+                menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+            });
+
+            document.addEventListener('click', () => {
+                menu.style.display = 'none';
+            });
+        }
+
+        // Gắn chọn ảnh cho image-camera mới
+        function setupImageUpload(cameraBox) {
+            const fileInput = cameraBox.querySelector('input[type="file"]');
+            const image = cameraBox.querySelector('img');
+            const icon = cameraBox.querySelector('i');
+
+            cameraBox.addEventListener('click', () => {
+                fileInput.click();
+            });
+
+            fileInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        image.src = e.target.result;
+                        image.style.display = 'block';
+                        icon.style.display = 'none';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // Gọi ban đầu để setup cho các bước sẵn có
+        setupAddStepButtons();
+        setupDeleteStepButtons();
+
+        ///
+        document.querySelector('.button-header3').addEventListener('click', function (e) {
+            e.preventDefault();
+            let isValid = true;
+
+            // Hàm tiện lợi để hiển thị lỗi
+            function showError(element, message) {
+                const errorDiv = element.parentElement.querySelector('.error-message') || element.closest('.form-group')?.querySelector('.error-message');
+                if (errorDiv) {
+                    errorDiv.textContent = message;
+                }
+                element.classList.add('invalid');
+            }
+
+            function clearError(element) {
+                //const errorDiv = element.parentElement.querySelector('.error-message') || element.closest('.form-group')?.querySelector('.error-message');
+                let errorDiv = element.nextElementSibling;
+                if (!errorDiv || !errorDiv.classList.contains('error-message')) {
+                    errorDiv = element.closest('.form-group')?.querySelector('.error-message');
+                }
+
+                if (errorDiv) {
+                    errorDiv.textContent = '';
+                }
+                element.classList.remove('invalid');
+            }
+
+            // Tên món
+            const tenMon = document.querySelector('.tenmon input');
+            if (!tenMon.value.trim()) {
+                isValid = false;
+                showError(tenMon, 'Vui lòng nhập tên món ăn.');
+            } else if (tenMon.value.length > 100) {
+                isValid = false;
+                showError(tenMon, 'Tên món không được vượt quá 100 ký tự.');
+            } else {
+                clearError(tenMon);
+            }
+
+            // Mô tả
+            const moTa = document.querySelector('.autogrow');
+            if (!moTa.value.trim()) {
+                isValid = false;
+                showError(moTa, 'Vui lòng nhập mô tả món ăn.');
+            } else {
+                clearError(moTa);
+            }
+
+            // Danh mục
+            const danhMuc = document.getElementById('category');
+            if (!danhMuc.value) {
+                isValid = false;
+                showError(danhMuc, 'Vui lòng chọn danh mục.');
+            } else {
+                clearError(danhMuc);
+            }
+            const anhMonAn = document.getElementById('imgInput');
+            if (!anhMonAn.files || anhMonAn.files.length === 0) {
+                // isValid = false;
+                // alert('Vui lòng chọn ảnh cho món ăn.'); // hoặc hiển thị lỗi gần khung hình
+            }
+            // Nguyên liệu
+            const nguyenLieu = document.querySelector('.bakicho textarea');
+            if (!nguyenLieu.value.trim()) {
+                isValid = false;
+                showError(nguyenLieu, 'Vui lòng nhập nguyên liệu.');
+            } else {
+                clearError(nguyenLieu);
+            }
+
+            // Khẩu phần
+            const khauPhan = document.querySelector('.khauphan input');
+            if (!khauPhan.value.trim()) {
+                isValid = false;
+                showError(khauPhan, 'Vui lòng nhập khẩu phần.');
+            } else {
+                clearError(khauPhan);
+            }
+
+            // Thời gian nấu
+            const thoiGianNau = document.querySelector('.buoc input');
+            if (!thoiGianNau.value.trim()) {
+                isValid = false;
+                showError(thoiGianNau, 'Vui lòng nhập thời gian nấu.');
+            } else {
+                clearError(thoiGianNau);
+            }
+
+            // Các bước nấu
+            document.querySelectorAll('.container3 textarea').forEach(textarea => {
+                if (!textarea.value.trim()) {
+                    isValid = false;
+                    showError(textarea, 'Vui lòng nhập nội dung bước này.');
+                } else {
+                    clearError(textarea);
+                }
+            });
+
+            if (isValid) {
+                const formData = new FormData();
+
+                formData.append('title', tenMon.value);
+                formData.append('description', moTa.value);
+                formData.append('ingredients', nguyenLieu.value);
+                formData.append('serving_size', khauPhan.value);
+                formData.append('cooking_time', thoiGianNau.value);
+                formData.append('category_id', danhMuc.value);
+
+                // Ảnh món ăn
+                const mainImage = anhMonAn.files[0];
+                if (mainImage) {
+                    formData.append('image', mainImage);
+                }
+
+                // Các bước
+                const stepElements = document.querySelectorAll('.container3');
+                const steps = [];
+
+                stepElements.forEach((el, idx) => {
+                    const stepText = el.querySelector('textarea').value;
+                    const stepImageInput = el.nextElementSibling?.querySelector('input[type="file"]');
+                    const imageFile = stepImageInput?.files?.[0];
+
+                    // Lấy existing_image (nếu tồn tại) — ưu tiên input.hidden trong container3, fallback lấy img.src
+                    let existingImage = '';
+                    const hiddenInput = el.querySelector('.existing-image');
+                    if (hiddenInput && hiddenInput.value) {
+                        existingImage = hiddenInput.value;
+                    } else {
+                        const img = el.nextElementSibling?.querySelector('img');
+                        if (img && img.src) existingImage = img.src;
+                    }
+
+                    steps.push({
+                        step_number: idx + 1,
+                        description: stepText,
+                        image_field: `step_image_${idx}`,
+                        existing_image: existingImage || ''
+                    });
+
+                    if (imageFile) {
+                        formData.append(`step_image_${idx}`, imageFile);
+                    }
+                });
+
+
+                formData.append('steps', JSON.stringify(steps));
+
+                // Gửi về Flask
+                fetch(`/update_post/${postId}`, {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.message) {
+                            alert(result.message);
+                            window.location.href = '/'; // hoặc chuyển trang
+                        } else {
+                            alert('Lỗi: ' + result.error);
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        alert('Lỗi gửi dữ liệu!');
+                    });
+            }
+        })
+        ///
+        // function setupCharCounter(inputSelector, countSelector, max) {
+        //     const input = document.querySelector(inputSelector);
+        //     const count = document.querySelector(countSelector);
+        //     if (!input || !count) return;
+        //     input.addEventListener('input', () => {
+        //         let len = input.value.length;
+        //         if (len > max) input.value = input.value.slice(0, max);
+        //         count.textContent = `${input.value.length}/${max}`;
+        //     });
+        // }
+        function setupCharCounter(inputSelector, countSelector, max) {
+            const input = document.querySelector(inputSelector);
+            const count = document.querySelector(countSelector);
+            if (!input || !count) return;
+
+            input.addEventListener('input', () => {
+                count.textContent = `${input.value.length}/${max}`;
+            });
+        }
+        setupCharCounter('#titleInput', '#titleCount', 100);
+        setupCharCounter('#descInput', '#descCount', 500);
+        setupCharCounter('#portionInput', '#portionCount', 50);
+        setupCharCounter('#ingredientInput', '#ingredientCount', 200);
+
+        // Bước nấu nhiều textarea, thêm tự động cho mỗi textarea
+        // function setupStepCharCounters(container = document) {
+        //     container.querySelectorAll('.container3 textarea').forEach((ta) => {
+        //         // Kiểm tra nếu đã có char-count rồi thì bỏ qua
+        //         if (ta.nextElementSibling && ta.nextElementSibling.classList.contains('char-count')) return;
+
+        //         ta.setAttribute('maxlength', '200');
+        //         let counter = document.createElement('div');
+        //         counter.className = 'char-count';
+        //         counter.textContent = `${ta.value.length}/200`;
+        //         ta.parentNode.insertBefore(counter, ta.nextSibling);
+        //         ta.addEventListener('input', () => {
+        //             let len = ta.value.length;
+        //             if (len > 200) ta.value = ta.value.slice(0, 200);
+        //             counter.textContent = `${ta.value.length}/200`;
+        //         });
+        //     });
+        // }
+        function setupStepCharCounters(container = document) {
+            const max = 500;
+            container.querySelectorAll('.container3 textarea').forEach((ta) => {
+                // Nếu đã có char-count rồi thì bỏ qua
+                if (ta.nextElementSibling && ta.nextElementSibling.classList.contains('char-count')) return;
+
+                ta.setAttribute('maxlength', max);
+                let counter = document.createElement('div');
+                counter.className = 'char-count';
+                counter.textContent = `${ta.value.length}/${max}`;
+                ta.parentNode.insertBefore(counter, ta.nextSibling);
+
+                ta.addEventListener('input', () => {
+                    counter.textContent = `${ta.value.length}/${max}`;
+                });
+            });
+        }
+        setupStepCharCounters();
+
+        // Gắn sự kiện sau khi tạo bước mới
+        function wrapCreateStep(originalCreateStep) {
+            return function (index) {
+                const result = originalCreateStep(index);
+                setupStepCharCounters(result.container);
+                return result;
+            }
+        }
+
+        if (typeof createStep === 'function') {
+            createStep = wrapCreateStep(createStep);
+        }
+
+        document.querySelector('.buoclam').addEventListener('click', () => {
+            const parent = document.querySelector('.container2');
+            const allSteps = document.querySelectorAll('.container3');
+            const index = allSteps.length + 1;
+
+            const { container, imageCamera } = createStep(index);
+
+            const buocLamElement = document.querySelector('.buoclam');
+            parent.insertBefore(container, buocLamElement);
+            parent.insertBefore(imageCamera, buocLamElement);
+
+            updateStepNumbers();
+            setupAddStepButtons();
+            setupDeleteStepButtons();
+            setupMenuToggle(container);
+            setupImageUpload(imageCamera);
+        });
+        // function toggleSidebar() {
+        //     const sidebar = document.getElementById('sidebar');
+        //     sidebar.classList.toggle('collapsed');
+        // }
+
+        // Khi bấm nút Xóa
+        document.querySelector('.button-header1').addEventListener('click', function () {
+            // Xóa ảnh đại diện chính
+            const preview = document.getElementById('preview');
+            const icon = document.getElementById('icon');
+            const imgInput = document.getElementById('imgInput');
+            preview.src = '';
+            preview.style.display = 'none';
+            icon.style.display = 'flex';
+            imgInput.value = '';
+
+            // Xóa tất cả ảnh trong các bước (class image-camera)
+            document.querySelectorAll('.image-camera').forEach(cameraBox => {
+                const img = cameraBox.querySelector('img');
+                const icon = cameraBox.querySelector('i');
+                const fileInput = cameraBox.querySelector('input[type="file"]');
+                img.src = '';
+                img.style.display = 'none';
+                icon.style.display = 'flex';
+                fileInput.value = '';
+            });
+
+            // Xóa toàn bộ nội dung input và textarea
+            document.querySelectorAll('input[type="text"], textarea').forEach(el => {
+                el.value = '';
+            });
+
+            // Reset tất cả select
+            document.querySelectorAll('select').forEach(sel => {
+                sel.selectedIndex = 0;
+            });
+
+            // Reset bộ đếm ký tự (nếu có)
+            document.querySelectorAll('.char-count').forEach(count => {
+                count.textContent = '0/' + (count.id.includes('title') ? '100' :
+                    count.id.includes('desc') ? '500' :
+                        count.id.includes('ingredient') ? '200' :
+                            count.id.includes('portion') ? '50' : '');
+            });
+        });
+
+
+    </script>
+</body>
+
+</html>

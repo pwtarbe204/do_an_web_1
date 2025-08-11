@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        header {
+            height: 60px;
+            width: 100%;
+            background-color: rgb(255, 118, 20);
+            margin-bottom: 60px;
+        }
+
+        header img {
+            width: 100px;
+            height: 40px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container-button {
+            display: flex;
+            margin-bottom: 30px;
+        }
+
+        .container-button input {
+            width: 60px;
+            height: 60px;
+            border-radius: 3px;
+            border: solid 1px rgb(228, 226, 223);
+            outline-color: rgb(44, 93, 216);
+            margin-right: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 17px;
+        }
+
+        .btn-vetify {
+            width: 440px;
+            height: 50px;
+            border-style: none;
+            background-color: rgb(216, 216, 214);
+            border-radius: 5px;
+            font-size: 17px;
+            color: rgb(184, 180, 180);
+            cursor: pointer;
+        }
+
+        .btn-vetify:hover {
+            background-color: darkgrey;
+        }
+
+        .btn-back {
+            margin-top: 30px;
+            width: 440px;
+            height: 40px;
+            border-style: none;
+            background-color: rgb(255, 255, 255);
+            border-radius: 5px;
+            font-size: 17px;
+            color: rgb(107, 141, 236);
+        }
+
+        .btn-back:hover {
+            background-color: rgb(195, 202, 216);
+            transform: 0.5s;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<header>
+</header>
+
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="container">
+        <form method="POST" id="verifyForm" action="/verify">
+            <div>Xác nhận email của bạn</div>
+            <div class="container-button">
+                <input type="text" class="code-input" maxlength="1">
+                <input type="text" class="code-input" maxlength="1">
+                <input type="text" class="code-input" maxlength="1">
+                <input type="text" class="code-input" maxlength="1">
+                <input type="text" class="code-input" maxlength="1">
+                <input type="text" class="code-input" maxlength="1">
+            </div>
+            <input type="hidden" name="code" id="fullCode">
+            <button type="submit" class="btn-vetify">Xác nhận email</button>
+        </form>
+
+        <button class="btn-back">Trở về đăng ký</button>
+    </div>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const inputs = document.querySelectorAll(".container-button input");
+        const verifyBtn = document.querySelector(".btn-vetify");
+        const form = document.getElementById("verifyForm");
+        const hiddenCode = document.getElementById("fullCode");
+        function checkAllInputsFilled() {
+            const allFilled = Array.from(inputs).every(input => input.value.trim().length === 1);
+            if (allFilled) {
+                verifyBtn.style.backgroundColor = "rgb(65, 105, 225)"; // xanh biển
+                verifyBtn.style.color = "white";
+            } else {
+                verifyBtn.style.backgroundColor = "rgb(216, 216, 214)";
+                verifyBtn.style.color = "rgb(184, 180, 180)";
+            }
+        }
+
+        inputs.forEach((input, index) => {
+            input.maxLength = 1;
+
+            input.addEventListener("input", function () {
+                if (input.value.length > 0 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+                checkAllInputsFilled();
+            });
+
+            input.addEventListener("keydown", function (e) {
+                if (e.key === "Backspace" && !input.value && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
+
+        form.addEventListener("submit", function (e) {
+            // Gộp chuỗi mã xác minh trước khi submit
+            const code = Array.from(inputs).map(input => input.value).join('');
+            hiddenCode.value = code;
+        });
+    });
+</script>
+
+</html>

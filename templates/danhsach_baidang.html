@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily taste</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            font-size: 17px;
+            font-weight: 300;
+        }
+
+
+        header {
+            height: 90px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 17px;
+            font-weight: 300;
+        }
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 18%;
+            /* Vì sidebar chiếm 18%, nên bắt đầu từ đó */
+            right: 0;
+            height: 70px;
+            background-color: white;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .top-bar a {
+            /* Bỏ dấu gạch chân cho thẻ a và chỉnh kích cở của phần tử */
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .logo {
+            /*căn chỉnh vị trí của logo*/
+            position: absolute;
+            left: 50%;
+            transform: translateX(-10%);
+        }
+
+        .logo img {
+            /*Căn chỉnh kích cở cho trang web*/
+            margin-top: 10px;
+            width: 280px;
+            height: 100px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            /* căn giữa theo chiều ngang */
+            align-items: center;
+
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-left: auto;
+            background-color: transparent;
+        }
+
+        .auth-area {
+            display: flex;
+            align-items: center;
+        }
+
+        .inline-icon-text {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            color: rgb(255, 255, 255);
+        }
+
+        .register {
+            /*Chỉnh nút chữ đăng nhập và icon đăng nhập*/
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .register a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .icon-link {
+            /*Chỉnh icon đăng nhập và tìm kiếm*/
+            text-decoration: none;
+            color: rgb(255, 255, 255);
+            font-size: 18px;
+        }
+
+        .menu-bar {
+            /*Phần danh mục*/
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px 0;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            /*border-bottom: 1px solid rgb(196, 193, 193);*/
+        }
+
+        .menu-icons {
+            /* */
+            display: flex;
+            gap: 30px;
+        }
+
+        .menu-icons a {
+            text-decoration: none;
+        }
+
+        .icon-large {
+            font-size: 20px;
+            font-weight: bold;
+            justify-items: center;
+        }
+
+        .menu-bar a {
+            display: block;
+            /* giúp phủ toàn bộ vùng */
+            text-decoration: none;
+            color: black;
+            transition: color 0.3s;
+        }
+
+        .menu-bar a:hover {
+            color: rgb(5, 20, 108);
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 10px;
+            padding: 10px;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .box img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .dangnhap {
+            width: 120px;
+            height: 45px;
+            background-color: aliceblue;
+            text-align: center;
+            align-items: center;
+            padding: 5px;
+            font-size: 17px;
+            font-family: 'Poppins', sans-serif;
+            border-radius: 10px;
+            border-color: gainsboro;
+            font-weight: 500;
+            color: rgb(95, 91, 91);
+            cursor: pointer;
+        }
+
+        .vietmonmoi {
+            width: 180px;
+            height: 45px;
+            background-color: rgb(255, 118, 20);
+            text-align: center;
+            align-items: center;
+            padding: 5px;
+            font-size: 17px;
+            font-weight: 500;
+            border-radius: 10px;
+            border-color: gainsboro;
+            font-family: 'Poppins', sans-serif;
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            border: none;
+        }
+
+        .vietmonmoi:hover {
+            background-color: rgb(245, 106, 7);
+        }
+
+        .vietmonmoi i {
+            font-size: 23px;
+            align-items: center;
+        }
+
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 18%;
+            right: 0;
+            height: 70px;
+            background-color: white;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .top-bar a {
+            /* Bỏ dấu gạch chân cho thẻ a và chỉnh kích cở của phần tử */
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .logo {
+            /*căn chỉnh vị trí của logo*/
+            position: absolute;
+            left: 50%;
+            transform: translateX(-10%);
+        }
+
+        .logo img {
+            /*Căn chỉnh kích cở cho trang web*/
+            margin-top: 10px;
+            width: 280px;
+            height: 100px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            /* căn giữa theo chiều ngang */
+            align-items: center;
+
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-left: auto;
+            background-color: transparent;
+        }
+
+        .auth-area {
+            display: flex;
+            align-items: center;
+        }
+
+        .inline-icon-text {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            color: rgb(255, 255, 255);
+        }
+
+        .register {
+            /*Chỉnh nút chữ đăng nhập và icon đăng nhập*/
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .register a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .icon-link {
+            /*Chỉnh icon đăng nhập và tìm kiếm*/
+            text-decoration: none;
+            color: rgb(255, 255, 255);
+            font-size: 18px;
+        }
+
+        .logout {
+            display: flex;
+
+        }
+
+        .login-email {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
+
+        .login-email input {
+            width: 250px;
+            height: 40px;
+            border-radius: 5px;
+            outline-color: #0a47cc;
+            border: 1px solid rgb(94, 95, 98);
+            font-size: 15px;
+            background-color: rgb(250, 250, 250);
+            margin-bottom: 15px;
+            padding-left: 8px;
+        }
+
+        .login-email button {
+            width: 260px;
+            height: 55px;
+            background-color: #1053e2;
+            color: rgb(255, 255, 255);
+            border-radius: 5px;
+            font-size: 16px;
+            border-style: none;
+            cursor: pointer;
+        }
+
+        .login-email button:hover {
+            background-color: #0a44c2;
+        }
+
+        .avatar-img {
+            border-radius: 50%;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .dropdown-email {
+            position: absolute;
+            top: 45px;
+            /* khoảng cách từ nút xuống */
+            right: 180px;
+            display: none;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            color: #797676;
+
+        }
+
+        .menu-bar {
+            /*Phần danh mục*/
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px 0;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            /*border-bottom: 1px solid rgb(196, 193, 193);*/
+        }
+
+        .menu-icons {
+            /* */
+            display: flex;
+            gap: 30px;
+        }
+
+        .menu-icons a {
+            text-decoration: none;
+        }
+
+        .icon-large {
+            font-size: 20px;
+            font-weight: bold;
+            justify-items: center;
+        }
+
+        .menu-bar a {
+            display: block;
+            /* giúp phủ toàn bộ vùng */
+            text-decoration: none;
+            color: black;
+            transition: color 0.3s;
+        }
+
+        .menu-bar a:hover {
+            color: rgb(5, 20, 108);
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 10px;
+            padding: 10px;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .box img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+
+        /* main {
+            margin-left: 15%;
+            margin-right: 15%;
+        } */
+
+        .dangnhap {
+            width: 120px;
+            height: 45px;
+            background-color: aliceblue;
+            text-align: center;
+            align-items: center;
+            padding: 5px;
+            font-size: 17px;
+            font-family: 'Poppins', sans-serif;
+            border-radius: 10px;
+            border-color: gainsboro;
+            font-weight: 500;
+            color: rgb(95, 91, 91);
+            cursor: pointer;
+        }
+
+        .vietmonmoi {
+            width: 180px;
+            height: 45px;
+            background-color: rgb(255, 118, 20);
+            text-align: center;
+            align-items: center;
+            padding: 5px;
+            font-size: 17px;
+            font-weight: 500;
+            border-radius: 10px;
+            border-color: gainsboro;
+            font-family: 'Poppins', sans-serif;
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            border: none;
+        }
+
+        .vietmonmoi:hover {
+            background-color: rgb(245, 106, 7);
+        }
+
+        .vietmonmoi i {
+            font-size: 23px;
+            align-items: center;
+        }
+
+        .layout-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 18%;
+            background-color: #fff;
+            border-right: 1px solid #ddd;
+            padding: 20px 15px;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            /* Chiều cao 100% màn hình */
+            overflow-y: auto;
+            /* Nếu nội dung dài */
+            z-index: 1000;
+        }
+
+        .sidebar .logo-sidebar img {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .sidebar .menu a {
+            display: block;
+            padding: 10px 5px;
+            margin-bottom: 10px;
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+        }
+
+        .sidebar .menu a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .main-content {
+            width: 82%;
+            /*padding: 20px;*/
+            padding: 10px 20px 20px;
+            /* tránh bị top-bar che mất nội dung */
+            box-sizing: border-box;
+            margin-left: 18%;/
+        }
+
+        .post-list {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .post-item {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 20px;
+        }
+
+        .post-item img {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .post-info h2 {
+            margin: 0 0 10px;
+            font-size: 20px;
+        }
+
+        .post-info p {
+            color: gray;
+            font-size: 14px;
+        }
+
+        .edit-button,
+        .delete-button {
+            padding: 6px 10px;
+            font-size: 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .edit-button {
+            background-color: #f0f8ff;
+            color: #333;
+            border: 1px solid #ccc;
+        }
+
+        .edit-button:hover {
+            background-color: #e0ecff;
+        }
+
+        .delete-button {
+            background-color: #ffe6e6;
+            color: #c00;
+            border: 1px solid #f5c2c2;
+        }
+
+        .delete-button:hover {
+            background-color: #ffcccc;
+        }
+    </style>
+</head>
+
+<body data-user="{{ 'yes' if user else 'no' }}">
+    <div class="layout-container">
+        <!-- Sidebar trái -->
+        <aside class="sidebar">
+            <div class="logo-sidebar">
+                <img src="{{ url_for('static', filename='logo_final5.png') }}" alt="logo" />
+            </div>
+            <nav class="menu">
+              
+                <!-- <a href="#"><i class="fa fa-crown"></i> Trang Chủ</a> -->
+                <a href="{{ url_for('index') }}"><i class="fa fa-crown"></i> Trang Chủ</a>
+                <div style="background-color: #ddd;"><a href="#"><i class="fa fa-chart-bar"></i> Danh Sách Bài Đăng</a></div>
+                <a href="{{ url_for('list_favorites') }}"><i class="fa fa-heart"></i> Danh Sách Yêu Thích</a>
+                <a href="{{ url_for('vietmonmoi') }}"><i class="fa fa-book"></i> Viết món mới</a>
+                <a href="{{ url_for('logout') }}"><i class="fa-solid fa-arrow-right-from-bracket"></i>Đăng xuất</a>
+            </nav>
+        </aside>
+        <div class="main-content">
+            <header>
+                <div class="top-bar">
+                    <div class="auth-buttons">
+                        <div class="auth-area">
+                            {% if user %}
+
+                            {% if user.type == 'google' %} <!--Nếu đăng nhập bằng google-->
+                            <img src="{{ user.picture }}" alt="Google Avatar" class="avatar-img" id="avatar-email">
+
+                            <div id="popupBox" class="dropdown-email">
+                                <img src="{{ user.picture }}" alt="Google Avatar" class="avatar-img">
+                                <div>{{ user.email }}</div>
+                                <div>{{ user.name }}</div>
+                                <form action="/logout">
+                                    <button class="dangnhap"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng
+                                        xuất</button>
+                                </form>
+                            </div>
+
+                            {% else %} <!--Nếu đăng nhập bằng email-->
+                            <img src="{{ user.picture }}" alt="Default Avatar" class="avatar-img" id="avatar-email"
+                                style="width: 40px; height: 40px; border-radius: 50%;">
+
+                            <div id="popupBox" class="dropdown-email">
+                                <img src="{{ user.picture }}" alt="Google Avatar" class="avatar-img">
+                                <div class="email">{{ user.email }}</div>
+                                <form action="/logout">
+                                    <button class="dangnhap"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng
+                                        xuất</button>
+                                </form>
+                            </div>
+
+                            {% endif %}
+                            {% else %} <!--Nếu chưa đăng nhập-->
+                            <form action="/dangky-dangnhap">
+                                <button class="dangnhap">Đăng nhập</button>
+                            </form>
+                            {% endif %}
+                        </div>
+
+                        <form action="{{ url_for('vietmonmoi') }}" method="POST">
+                            <button id="btnVietMonMoi" class="vietmonmoi"><i class="bi bi-pencil-square"></i> Viết món
+                                mới</button>
+                        </form>
+                    </div>
+                </div>
+            </header>
+
+            <h1 style="text-align: center; font-size: 25px; font-weight: bold;margin-bottom: 50px;">Tất cả bài viết của bạn</h1>
+            <div class="post-list">
+                {% for post in my_posts %}
+                <div class="post-item" style="flex-direction: column;">
+                    <a href="{{ url_for('view_post', post_id=post.id) }}"
+                        style="text-decoration: none; color: inherit;">
+                        <div style="display: flex; gap: 20px;">
+                            <img src="/{{ post.image }}" alt="Ảnh bài viết">
+                            <div class="post-info">
+                                <h2>{{ post.title }}</h2>
+                                <p>Ngày đăng: {{ post.created_at }}</p>
+                            </div>
+                        </div>
+                    </a>
+                    <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 10px;">
+                        <a href="{{ url_for('edit_post', post_id=post.id) }}" class="edit-button">✏️ Chỉnh sửa</a>
+                        <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST"
+                            onsubmit="return confirm('Bạn có chắc muốn xoá bài viết này không?');">
+                            <button type="submit" class="delete-button">🗑️ Xoá</button>
+                        </form>
+                    </div>
+                </div>
+                {% else %}
+                <p>Chưa có bài viết nào.</p>
+                {% endfor %}
+            </div>
+        </div>
+</body>
+<script>
+    const avatar_email = document.getElementById('avatar-email');
+    const popup = document.getElementById('popupBox');
+
+    avatar_email.addEventListener('click', function (event) {
+        // Toggle hiển thị popup
+        popup.style.display = (popup.style.display === 'block') ? 'none' : 'block';
+    });
+
+    document.addEventListener('click', function (event) {
+        // Ẩn popup nếu click bên ngoài
+        if (!popup.contains(event.target) && !avatar_email.contains(event.target)) {
+            popup.style.display = 'none';
+        }
+    });
+</script>
+
+</html>
